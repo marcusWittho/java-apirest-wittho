@@ -15,46 +15,37 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.produtos.apirest.repository.ProdutoRepository;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-
 import com.produtos.apirest.models.Produto;
 
 @RestController
 @RequestMapping(value="/api")
-@Api(value="API REST Produtos")
 @CrossOrigin(origins="*")
 public class ProdutoResource {
 	
 	@Autowired
 	ProdutoRepository produtoRepository;
 	
-	@GetMapping("/produtos")
-	@ApiOperation(value="Retorna os produtos cadastrados.")
+	@GetMapping("/produtos")	
 	public List<Produto> listaProdutos() {
 		return produtoRepository.findAll();
 	}
 	
-	@GetMapping("/produto/{id}")
-	@ApiOperation(value="Retorna o produto referente ao id pesquisado.")
+	@GetMapping("/produto/{id}")	
 	public Produto listaProdutoPorId(@PathVariable(value="id") long id) {
 		return produtoRepository.findById(id);
 	}
 	
-	@PostMapping("/produto")
-	@ApiOperation(value="Insere um produto no banco de dados.")
+	@PostMapping("/produto")	
 	public Produto salvaProduto(@RequestBody Produto produto) {
 		return produtoRepository.save(produto);
 	}
 	
-	@DeleteMapping("/produto/{id}")
-	@ApiOperation(value="Deleta do banco o item referente ao id informado. ")
+	@DeleteMapping("/produto/{id}")	
 	public void deletaProduto(@PathVariable(value="id") long id) {
 		produtoRepository.deleteById(id);
 	}
 	
-	@PutMapping("/produto")
-	@ApiOperation(value="Atualiza as informações do item informado.")
+	@PutMapping("/produto")	
 	public Produto atualizaProduto(@RequestBody Produto produto) {
 		return produtoRepository.save(produto);
 	}
